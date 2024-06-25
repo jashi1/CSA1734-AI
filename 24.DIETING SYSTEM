@@ -1,0 +1,24 @@
+% Facts about food items and their carbohydrate content
+carb_content(apple, 15).
+carb_content(banana, 30).
+carb_content(rice, 45).
+carb_content(chicken, 0).
+carb_content(broccoli, 5).
+
+% Rules to check if a food item is suitable for a person with diabetes
+suitable_for_diabetes(Food) :-
+    carb_content(Food, Carb),
+    Carb < 20.
+
+% Rules to suggest a diet for a person with diabetes
+suggest_diet(Diet) :-
+    findall(Food, (carb_content(Food, Carb), Carb < 20), Diet).
+
+% Example usage:
+% To check if a specific food item is suitable for diabetes
+% ?- suitable_for_diabetes(apple).
+% true.
+
+% To get a list of suitable foods for a person with diabetes
+% ?- suggest_diet(Diet).
+% Diet = [apple, chicken, broccoli].
